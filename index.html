@@ -3385,10 +3385,7 @@ function bbToggleDetail(id,btn){var panel=document.getElementById(id);if(!panel)
 </script>
 <script>
 function openHubTree(key, button){
-  if(key==='continuous'){
-    const link=document.querySelector('#hub-detail-continuous a.hub-item');
-    if(link){link.click();return;}
-  }
+  if(key==='continuous'){ openCMEPage(); return; }
   if(key==='education'){
     showPage('educationPage');
     return;
@@ -3739,5 +3736,25 @@ let startX=null;const swipe=document.getElementById('tbk-swipe');swipe.addEventL
 @media(min-width:701px) and (max-width:950px){#service-extras .extra-card{padding:14px!important;gap:10px!important}#service-extras .ref-icon{flex-basis:48px!important;width:48px!important;height:48px!important;font-size:21px!important}#service-extras .compact-qr{flex-basis:74px!important;width:74px!important}#service-extras .compact-qr img{width:74px!important;height:74px!important}}
 @media(max-width:360px){#service-extras .ref-icon{flex-basis:45px!important;width:45px!important;height:45px!important}#service-extras .compact-qr{flex-basis:72px!important;width:72px!important}#service-extras .compact-qr img{width:72px!important;height:72px!important}}
 </style>
+
+<style>
+#cmeFullPage{position:fixed;inset:0;z-index:2147483000;background:#f4f8fc;overflow-y:auto;padding:24px 14px 70px;box-sizing:border-box}
+#cmeFullPage[hidden]{display:none!important}
+#cmeFullPage .cme-shell{max-width:1100px;margin:auto;text-align:center}
+#cmeFullPage h2{font-size:clamp(21px,3vw,32px);font-weight:850;color:#103b70;margin:12px 0 4px}
+#cmeFullPage p{color:#536981;margin:0 0 20px}
+#cmeFullPage img{width:100%;height:auto;display:block;box-shadow:0 8px 30px #183b5b22;background:white;border-radius:9px}
+#cmeFullPage .cme-back{margin:28px auto 0;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#0869aa;color:white;border:0;border-radius:40px;padding:15px 24px;font-weight:800;cursor:pointer}
+</style>
+<div id="cmeFullPage" hidden role="dialog" aria-modal="true" aria-label="Continuous Improvement CME">
+ <div class="cme-shell"><h2>CONTINUOUS IMPROVEMENT</h2><p>CME PERINGKAT JABATAN PATOLOGI 2025/2026</p>
+ <img src="images/cme-2025-2026.png" alt="CME Peringkat Jabatan Patologi 2025/2026: jadual 24 pembentangan" loading="lazy">
+ <button class="cme-back" type="button" onclick="closeCMEPage()">← BACK TO DEPARTMENT HUB</button></div>
+</div>
+<script>
+function openCMEPage(){window.__cmeOldScrollY=window.scrollY;document.getElementById('cmeFullPage').hidden=false;document.body.style.overflow='hidden';document.getElementById('cmeFullPage').scrollTop=0;}
+function closeCMEPage(){document.getElementById('cmeFullPage').hidden=true;document.body.style.overflow='';window.scrollTo(0,window.__cmeOldScrollY||0);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!document.getElementById('cmeFullPage').hidden)closeCMEPage()});
+</script>
 </body>
 </html>
